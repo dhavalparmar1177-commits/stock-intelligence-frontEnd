@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   StockIntel Design System — Institutional FinTech Styling
+   Inspired by Linear, Koyfin, TradingView & Bloomberg Terminal.
+   ============================================================ */
+
+:root {
+  --si-bg: #f8fafc;
+  --si-surface: #ffffff;
+  --si-surface-subtle: #f1f5f9;
+  --si-border: #e2e8f0;
+  --si-border-subtle: #f1f5f9;
+  --si-ink: #0f172a;
+  --si-ink-secondary: #475569;
+  --si-ink-muted: #94a3b8;
+  --si-brand: #2563eb;
+  --si-positive: #059669;
+  --si-negative: #e11d48;
+  --si-warning: #d97706;
+  --si-ai: #7c3aed;
+  --si-radius-card: 0.875rem;
+  --si-shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --si-shadow-pop: 0 12px 32px -4px rgb(15 23 42 / 0.15);
+}
+
+.dark {
+  --si-bg: #090d16;
+  --si-surface: #0e1626;
+  --si-surface-subtle: #131d31;
+  --si-border: #1e293b;
+  --si-border-subtle: #152033;
+  --si-ink: #f8fafc;
+  --si-ink-secondary: #94a3b8;
+  --si-ink-muted: #64748b;
+  --si-brand: #3b82f6;
+  --si-positive: #10b981;
+  --si-negative: #f43f5e;
+  --si-warning: #f59e0b;
+  --si-ai: #8b5cf6;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 antialiased font-sans selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Accessible focus outline */
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  .dark :focus-visible {
+    outline-color: #60a5fa;
+  }
+
+  /* Data numerals align in tables and metric grids */
+  .si-numeric {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* Custom subtle scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+@layer components {
+  /* Skeleton shimmer */
+  .si-skeleton {
+    @apply bg-slate-200/70 dark:bg-slate-800/80 rounded-lg;
+    position: relative;
+    overflow: hidden;
+  }
+  .si-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.5), transparent);
+    animation: si-shimmer 1.5s infinite;
+  }
+  .dark .si-skeleton::after {
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+  }
+
+  /* Glassmorphism panel */
+  .si-glass {
+    @apply bg-white/80 dark:bg-[#0e1626]/85 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80;
+  }
+
+  /* Card container */
+  .si-card {
+    @apply bg-white dark:bg-[#0e1626] border border-slate-200/90 dark:border-slate-800/80 rounded-xl shadow-card transition-all duration-150;
+  }
+}
+
+@keyframes si-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-skeleton::after {
+    animation: none;
+  }
+}
