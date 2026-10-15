@@ -3,77 +3,94 @@
 @tailwind utilities;
 
 /* ============================================================
-   StockIntel Design System — Institutional FinTech Styling
-   Inspired by Linear, Koyfin, TradingView & Bloomberg Terminal.
+   StockIntel Design System — "Midnight Aurora" Theme
+   Dark-first, glowing, glassmorphic institutional styling.
    ============================================================ */
 
 :root {
-  --si-bg: #f8fafc;
-  --si-surface: #ffffff;
-  --si-surface-subtle: #f1f5f9;
-  --si-border: #e2e8f0;
-  --si-border-subtle: #f1f5f9;
-  --si-ink: #0f172a;
-  --si-ink-secondary: #475569;
-  --si-ink-muted: #94a3b8;
-  --si-brand: #2563eb;
-  --si-positive: #059669;
-  --si-negative: #e11d48;
-  --si-warning: #d97706;
-  --si-ai: #7c3aed;
-  --si-radius-card: 0.875rem;
-  --si-shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
-  --si-shadow-pop: 0 12px 32px -4px rgb(15 23 42 / 0.15);
+  /* Soft Neo-Light Mode defaults */
+  --bg-0: #F6F5F2;
+  --bg-1: #FFFFFF;
+  --bg-2: #FFFFFF;
+  --bg-3: #F0EFEA;
+
+  --text-1: #14171F;
+  --text-2: #5A6478;
+  --text-3: #8E98A8;
+
+  --accent-gradient: linear-gradient(135deg, #4338CA 0%, #3B3BF0 60%, #06B6D4 100%);
+  --accent-primary: #3B3BF0;
+  --gain: #16A34A;
+  --loss: #DC2626;
+  --warning: #D97706;
+
+  --card-bg: rgba(255, 255, 255, 0.90);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --card-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dark {
-  --si-bg: #090d16;
-  --si-surface: #0e1626;
-  --si-surface-subtle: #131d31;
-  --si-border: #1e293b;
-  --si-border-subtle: #152033;
-  --si-ink: #f8fafc;
-  --si-ink-secondary: #94a3b8;
-  --si-ink-muted: #64748b;
-  --si-brand: #3b82f6;
-  --si-positive: #10b981;
-  --si-negative: #f43f5e;
-  --si-warning: #f59e0b;
-  --si-ai: #8b5cf6;
+  /* Midnight Aurora Dark Mode (DEFAULT) */
+  --bg-0: #070B14;
+  --bg-1: #0D1424;
+  --bg-2: #131C30;
+  --bg-3: #1A2540;
+
+  --text-1: #F4F6FB;
+  --text-2: #A3AEC7;
+  --text-3: #6B7792;
+
+  --accent-gradient: linear-gradient(135deg, #7C5CFF 0%, #4F8CFF 60%, #22D3EE 100%);
+  --accent-primary: #7C5CFF;
+  --gain: #2BD67B;
+  --loss: #FF5C6C;
+  --warning: #FFB84D;
+
+  --card-bg: rgba(19, 28, 48, 0.60);
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    color-scheme: light;
-  }
-
-  html.dark {
     color-scheme: dark;
   }
 
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
   body {
-    @apply bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 antialiased font-sans selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: var(--bg-0);
+    color: var(--text-1);
+    font-family: "Geist", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    antialiased: true;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
   /* Accessible focus outline */
   :focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #7C5CFF;
     outline-offset: 2px;
-    border-radius: 6px;
+    border-radius: 10px;
   }
 
-  .dark :focus-visible {
-    outline-color: #60a5fa;
-  }
-
-  /* Data numerals align in tables and metric grids */
+  /* Financial Tabular Figures */
   .si-numeric {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1;
-    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: -0.02em;
+  }
+
+  /* Section and Metric Labels */
+  .si-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
   }
 
   /* Custom subtle scrollbars */
@@ -85,24 +102,97 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 9999px;
   }
-  .dark ::-webkit-scrollbar-thumb {
-    background: #334155;
-  }
   ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    background: rgba(255, 255, 255, 0.25);
   }
 }
 
-@layer components {
-  /* Skeleton shimmer */
+@layer utilities {
+  /* Midnight Aurora Ambient Background Glows */
+  .ambient-aurora-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 650px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .ambient-glow-violet {
+    position: absolute;
+    top: -120px;
+    left: -80px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.15) 0%, rgba(124, 92, 255, 0) 70%);
+    filter: blur(80px);
+  }
+
+  .ambient-glow-cyan {
+    position: absolute;
+    top: -150px;
+    right: -100px;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.10) 0%, rgba(34, 211, 238, 0) 70%);
+    filter: blur(90px);
+  }
+
+  .ambient-subtle-grid {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+  }
+
+  /* Glass Card Surface */
+  .glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 20px;
+  }
+
+  /* Floating Navbar Blur */
+  .glass-navbar {
+    background: rgba(13, 20, 36, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  html:not(.dark) .glass-navbar {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  /* Primary Aurora Gradient Button */
+  .btn-aurora {
+    background: linear-gradient(135deg, #7C5CFF 0%, #4F8CFF 60%, #22D3EE 100%);
+    box-shadow: 0 8px 24px -4px rgba(124, 92, 255, 0.40);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-aurora:hover {
+    box-shadow: 0 12px 30px -2px rgba(124, 92, 255, 0.55);
+    transform: translateY(-1px);
+  }
+
+  /* Subtle shimmer for skeleton */
   .si-skeleton {
-    @apply bg-slate-200/70 dark:bg-slate-800/80 rounded-lg;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
     position: relative;
     overflow: hidden;
   }
@@ -111,32 +201,51 @@
     position: absolute;
     inset: 0;
     transform: translateX(-100%);
-    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.5), transparent);
-    animation: si-shimmer 1.5s infinite;
+    background: linear-gradient(
+      90deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.06) 50%,
+      transparent 100%
+    );
+    animation: shimmer 1.8s infinite;
   }
-  .dark .si-skeleton::after {
-    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.08), transparent);
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
   }
 
-  /* Glassmorphism panel */
-  .si-glass {
-    @apply bg-white/80 dark:bg-[#0e1626]/85 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80;
+  /* Price flash animations on quote update */
+  @keyframes flash-gain {
+    0% {
+      background-color: rgba(43, 214, 123, 0.28);
+      color: #2BD67B;
+    }
+    100% {
+      background-color: transparent;
+    }
   }
 
-  /* Card container */
-  .si-card {
-    @apply bg-white dark:bg-[#0e1626] border border-slate-200/90 dark:border-slate-800/80 rounded-xl shadow-card transition-all duration-150;
+  @keyframes flash-loss {
+    0% {
+      background-color: rgba(255, 92, 108, 0.28);
+      color: #FF5C6C;
+    }
+    100% {
+      background-color: transparent;
+    }
   }
-}
 
-@keyframes si-shimmer {
-  100% {
-    transform: translateX(100%);
+  .flash-gain {
+    animation: flash-gain 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .si-skeleton::after {
-    animation: none;
+  .flash-loss {
+    animation: flash-loss 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flash-gain,
+    .flash-loss {
+      animation: none !important;
+    }
   }
 }

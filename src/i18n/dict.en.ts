@@ -21,7 +21,7 @@ const en = {
     langLabel: "Language", lightMode: "Light mode", darkMode: "Dark mode", openMenu: "Open menu", closeMenu: "Close menu",
     homeAria: "StockIntel home", skipLink: "Skip to content", mobileNav: "Mobile",
   },
-  footer: { disclaimer: "Disclaimer: AI-powered Indian stock analysis (NSE/BSE) for information only. Forecasts are AI-generated estimates, never guaranteed. Not investment advice; no returns guaranteed." },
+  footer: { disclaimer: "Educational & informational purposes only. Not SEBI registered investment advisor. Market data delayed by 15 min or end-of-day. Forecasts and signals are algorithmic estimates, never guaranteed." },
   common: { loading: "Loading…", refreshNow: "Refresh now", noData: "No data", unavailable: "Unavailable", retry: "Retry", updated: "updated", autoRefresh: "auto-refresh 60s", empty: "Empty.", notVerified: "NOT VERIFIED" },
   dash: {
     searchPh: "Search company, symbol, exchange (e.g. TCS, Reliance, NSE)…",
@@ -31,9 +31,9 @@ const en = {
     greetMorning: "Good morning", greetAfternoon: "Good afternoon", greetEvening: "Good evening",
     subtitle: "Here's what's happening in Indian markets.",
     chart: "Market chart",
-    oppTitle: "AI opportunities", oppAll: "View all",
+    oppTitle: "AI market scanner", oppAll: "View all",
     briefTitle: "AI market brief",
-    briefDerived: "Derived from live market data — estimates, not investment advice.",
+    briefDerived: "Derived from live market data — estimates. For information only. Not investment advice.",
     watchTitle: "Watchlist", watchEmpty: "Your watchlist is empty.",
     watchAddPh: "Add symbol (e.g. RELIANCE)…", watchAdd: "Add", watchRemove: "Remove",
     watchNoMatch: "No matches — try a symbol like RELIANCE or TCS.",
@@ -347,7 +347,7 @@ const en = {
     aiForecastStore: "AI forecast store", liveQuotes: "Live quotes",
   },
   ipo: {
-    title: "IPO Center", subtitle: "Live Indian IPO intelligence with real-time NSE data & prospectus analytics.",
+    title: "IPO Center", subtitle: "Live Indian IPO intelligence with NSE data & prospectus analytics.",
     upcoming: "Upcoming", open: "Open", closed: "Closed", listed: "Listed",
     searchPh: "Search company, symbol or registrar…",
     dashboard: "Dashboard", calendar: "Calendar",
@@ -465,7 +465,7 @@ const en = {
   assistant: {
     title: "AI Investment Assistant",
     subtitle: "Ask questions about stocks, market concepts, IPOs, or investment strategies.",
-    disclaimer: "AI Assistant provides educational information and real-time market data lookups. Not investment advice.",
+    disclaimer: "AI Assistant provides educational information and market data lookups. Not investment advice.",
     inputPh: "Ask anything (e.g., What is PE ratio?, Is RELIANCE a good buy?, How to start?)....",
     suggested: "Suggested Questions",
     sources: "Data Sources & References",

@@ -94,7 +94,7 @@ export function AiAssistant() {
               ],
               learnMoreUrl: `/stocks/${stock.symbol}`,
               learnMoreLabel: `Open full AI Research Page for ${stock.symbol}`,
-              sources: ["NSE / BSE Official Real-time Market Feed"],
+              sources: ["NSE / BSE Market Feed (Delayed 15m)"],
               timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
             };
 
@@ -155,7 +155,7 @@ export function AiAssistant() {
       {/* Disclaimer */}
       <div className="bg-violet-50 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-800/60 rounded-xl p-3 text-xs text-violet-900 dark:text-violet-200 flex items-center gap-2">
         <span>💡</span>
-        <span>{t.assistant?.disclaimer || "AI Assistant provides educational information and real-time market data lookups. Not investment advice."}</span>
+        <span>{t.assistant?.disclaimer || "AI Assistant provides educational information and market data lookups. Not investment advice."}</span>
       </div>
 
       {/* Chat Messages Window */}

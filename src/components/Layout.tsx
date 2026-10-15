@@ -2,18 +2,21 @@ import { useEffect, useState, ReactNode } from "react";
 import { useLang } from "../i18n/LanguageContext";
 import Header from "./Header";
 import BottomNav from "./BottomNav";
-import { Container, Stack } from "./layout/primitives";
 
 /**
- * Global app shell with sticky Header, responsive Container, skip link, and footer.
+ * Global App Shell — "Midnight Aurora" Edition.
+ * Features ambient violet & cyan background glows, subtle grid texture,
+ * floating detached navbar, and max-width 1440px bento container.
  */
 export default function Layout({ children }: { children: ReactNode }) {
   const { t } = useLang();
+
+  // Dark-first default (falls back to dark unless explicitly saved as "light")
   const [dark, setDark] = useState(() => {
     try {
-      return localStorage.getItem("theme") === "dark";
+      return localStorage.getItem("theme") !== "light";
     } catch {
-      return false;
+      return true;
     }
   });
 
@@ -27,35 +30,45 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [dark]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 flex flex-col antialiased">
+    <div className="min-h-screen bg-[#F6F5F2] dark:bg-[#070B14] text-[#14171F] dark:text-[#F4F6FB] flex flex-col antialiased relative selection:bg-indigo-500/25 selection:text-indigo-300">
+      {/* Ambient Aurora Glows */}
+      <div className="ambient-aurora-glow" aria-hidden="true">
+        <div className="ambient-glow-violet" />
+        <div className="ambient-glow-cyan" />
+        <div className="ambient-subtle-grid" />
+      </div>
+
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-xl focus:text-sm focus:shadow-lg focus:outline-none"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-[#7C5CFF] focus:text-white focus:px-4 focus:py-2 focus:rounded-xl focus:text-sm focus:shadow-lg focus:outline-none"
       >
         {t.hdr.skipLink}
       </a>
+
+      {/* Floating Navbar */}
       <Header dark={dark} onToggleDark={() => setDark((v) => !v)} />
-      <main id="main-content" className="flex-1 w-full py-4 sm:py-6 lg:py-8">
-        <Container>
-          <Stack>{children}</Stack>
-        </Container>
+
+      {/* Main Content Area */}
+      <main id="main-content" className="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
+        {children}
       </main>
-      <footer className="w-full pb-8 pt-4">
-        <Container>
-          <div className="border-t border-slate-200/90 dark:border-slate-800/80 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
-            <p className="max-w-xl text-center sm:text-left leading-relaxed">
-              {t.footer.disclaimer}
-            </p>
-            <div className="flex items-center gap-3 shrink-0 text-slate-400 dark:text-slate-500">
-              <span>STOCKINTEL · NSE / BSE Intelligence</span>
-            </div>
+
+      {/* Footer */}
+      <footer className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-4 relative z-10">
+        <div className="border-t border-black/[0.06] dark:border-white/[0.06] pt-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#8E98A8] dark:text-[#6B7792]">
+          <p className="max-w-2xl text-center sm:text-left leading-relaxed">
+            Educational & informational purposes only. Not SEBI registered investment advisor. Market data delayed by 15 min or end-of-day. Forecasts and signals are algorithmic estimates, never guaranteed.
+          </p>
+          <div className="flex items-center gap-2 shrink-0 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+            <span className="text-amber-600 dark:text-[#FFB84D]">Delayed 15 min · Informational Feed</span>
           </div>
-        </Container>
+        </div>
       </footer>
+
+      {/* Mobile Floating Bottom Bar */}
       <BottomNav />
-      {/* Spacer so the fixed mobile bar never covers footer content */}
-      <div aria-hidden="true" className="h-16 md:hidden" />
+      <div aria-hidden="true" className="h-20 md:hidden" />
     </div>
   );
 }
-

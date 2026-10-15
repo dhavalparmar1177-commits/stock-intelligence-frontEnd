@@ -1,4 +1,13 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useState, useRef, useEffect } from "react";
+
+export interface DropdownProps {
+  label: string;
+  button: ReactNode;
+  children: ReactNode;
+  align?: "left" | "right";
+  buttonClassName?: string;
+  className?: string;
+}
 
 /**
  * Accessible dropdown menu with institutional surfaces, shadow-pop, and keyboard navigation.
@@ -8,12 +17,9 @@ export function Dropdown({
   button,
   children,
   align = "right",
-}: {
-  label: string;
-  button: ReactNode;
-  children: ReactNode;
-  align?: "left" | "right";
-}) {
+  buttonClassName,
+  className = "",
+}: DropdownProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -34,14 +40,18 @@ export function Dropdown({
   }, [open]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div ref={rootRef} className={`relative ${className}`}>
       <button
         type="button"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={label}
-        onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium px-3 py-1.5 rounded-lg border border-slate-200/90 dark:border-slate-800/80 bg-white dark:bg-[#0e1626] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors shadow-card"
+        onClick={() => setOpen((v: boolean) => !v)}
+        className={
+          buttonClassName !== undefined
+            ? buttonClassName
+            : "inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium px-3 py-1.5 rounded-lg border border-slate-200/90 dark:border-white/[0.08] bg-white/90 dark:bg-[#131C30]/90 text-slate-700 dark:text-[#F4F6FB] hover:bg-slate-50 dark:hover:bg-[#1A2540] transition-colors shadow-sm"
+        }
       >
         {button}
       </button>
@@ -79,11 +89,13 @@ export function DropdownItem({
     );
   }
   return (
-    <button role="menuitem" type="button" onClick={onSelect} className={cls}>
+    <button
+      role="menuitem"
+      type="button"
+      onClick={onSelect}
+      className={cls}
+    >
       {children}
     </button>
   );
 }
-
-export default Dropdown;
-

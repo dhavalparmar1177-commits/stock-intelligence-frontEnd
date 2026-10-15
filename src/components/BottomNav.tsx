@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Home, TrendingUp, Layers, Star, Sparkles } from "lucide-react";
 import { useLang } from "../i18n/LanguageContext";
 
 /**
@@ -6,24 +7,25 @@ import { useLang } from "../i18n/LanguageContext";
  */
 export function BottomNav() {
   const { t } = useLang();
+
   const item = ({ isActive }: { isActive: boolean }) =>
     `flex flex-col items-center justify-center gap-1 flex-1 py-2 text-[10px] sm:text-[11px] font-medium transition-all ${
       isActive
-        ? "text-blue-600 dark:text-blue-400 font-bold"
-        : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
+        ? "text-violet-600 dark:text-[#7C5CFF] font-bold"
+        : "text-slate-500 dark:text-[#A3AEC7] hover:text-slate-800 dark:hover:text-white"
     }`;
 
   return (
     <nav
       aria-label={`${t.hdr.mobileNav} primary`}
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-slate-200/90 dark:border-slate-800/80 bg-white/90 dark:bg-[#090d16]/95 backdrop-blur-md shadow-lg"
+      className="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-slate-200/90 dark:border-white/[0.06] bg-white/90 dark:bg-[#070B14]/90 backdrop-blur-xl shadow-lg"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="flex items-stretch px-1">
         <NavLink to="/" end className={item} aria-label={t.nav.home}>
           {({ isActive }) => (
             <>
-              <span aria-hidden="true" className={`text-base leading-none transition-transform ${isActive ? "scale-110" : ""}`}>🏠</span>
+              <Home className={`w-4 h-4 transition-transform ${isActive ? "scale-110 text-indigo-600 dark:text-indigo-400" : ""}`} />
               <span>{t.nav.home}</span>
             </>
           )}
@@ -31,7 +33,7 @@ export function BottomNav() {
         <NavLink to="/live" className={item} aria-label={t.nav.discover}>
           {({ isActive }) => (
             <>
-              <span aria-hidden="true" className={`text-base leading-none transition-transform ${isActive ? "scale-110" : ""}`}>📈</span>
+              <TrendingUp className={`w-4 h-4 transition-transform ${isActive ? "scale-110 text-indigo-600 dark:text-indigo-400" : ""}`} />
               <span>{t.nav.discover}</span>
             </>
           )}
@@ -39,7 +41,7 @@ export function BottomNav() {
         <NavLink to="/ipos" className={item} aria-label="IPOs">
           {({ isActive }) => (
             <>
-              <span aria-hidden="true" className={`text-base leading-none transition-transform ${isActive ? "scale-110" : ""}`}>🚀</span>
+              <Layers className={`w-4 h-4 transition-transform ${isActive ? "scale-110 text-indigo-600 dark:text-indigo-400" : ""}`} />
               <span>IPOs</span>
             </>
           )}
@@ -47,7 +49,7 @@ export function BottomNav() {
         <NavLink to="/watchlist" className={item} aria-label={t.nav.watchlist}>
           {({ isActive }) => (
             <>
-              <span aria-hidden="true" className={`text-base leading-none transition-transform ${isActive ? "scale-110" : ""}`}>⭐</span>
+              <Star className={`w-4 h-4 transition-transform ${isActive ? "scale-110 text-indigo-600 dark:text-indigo-400" : ""}`} />
               <span>{t.nav.watchlist}</span>
             </>
           )}
@@ -55,7 +57,7 @@ export function BottomNav() {
         <NavLink to="/opportunities" className={item} aria-label={t.nav.aiInsights}>
           {({ isActive }) => (
             <>
-              <span aria-hidden="true" className={`text-base leading-none transition-transform ${isActive ? "scale-110" : ""}`}>🤖</span>
+              <Sparkles className={`w-4 h-4 transition-transform ${isActive ? "scale-110 text-indigo-600 dark:text-indigo-400" : ""}`} />
               <span>{t.nav.ai}</span>
             </>
           )}
@@ -66,4 +68,3 @@ export function BottomNav() {
 }
 
 export default BottomNav;
-

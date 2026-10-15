@@ -1,115 +1,88 @@
 /**
- * StockIntel Design Tokens — Phase 1 foundation.
- *
- * Single source of truth for the visual system. Tailwind classes in
- * components reference these values; CSS variables in index.css mirror
- * them for non-Tailwind contexts (charts, third-party markup).
- *
- * Semantic color contract (do not invent new meanings):
- * - green  = positive
- * - red    = negative
- * - amber  = warning / watch
- * - blue/violet = AI
- * Everything else stays neutral.
+ * StockIntel Design Tokens — "Midnight Aurora" Theme
+ * Dark-first, premium, calm, glowing fintech design system.
+ * (To switch themes later, only this token block should need to change.)
  */
 
 export const colors = {
-  /** Page background: light neutral / dark institutional deep blue-slate. */
-  background: "#f8fafc",
-  backgroundDark: "#090d16",
-  /** Card surface. */
-  surface: "#ffffff",
-  surfaceDark: "#0e1626",
-  surfaceSubtleDark: "#131d31",
-  /** Default 1px borders on cards. */
-  border: "#e2e8f0",
-  borderDark: "#1e293b",
-  borderStrong: "#cbd5e1",
-  borderStrongDark: "#334155",
+  // Midnight Aurora Background layers
+  bg0: "#070B14", // Page background
+  bg1: "#0D1424", // Surface / Card base
+  bg2: "#131C30", // Raised / Glass cards
+  bg3: "#1A2540", // Hover states / Active dropdowns
 
-  ink: "#0f172a",
-  inkDark: "#f8fafc",
-  inkSecondary: "#475569",
-  inkSecondaryDark: "#94a3b8",
-  inkMuted: "#94a3b8",
-  inkMutedDark: "#64748b",
+  // Text hierarchy
+  text1: "#F4F6FB", // Primary text
+  text2: "#A3AEC7", // Secondary text / descriptions
+  text3: "#6B7792", // Muted / Labels / Micro timestamps
 
-  brand: "#2563eb",
-  brandHover: "#1d4ed8",
+  // Aurora Accent gradient: Violet -> Blue -> Cyan
+  accentGradient: "linear-gradient(135deg, #7C5CFF 0%, #4F8CFF 60%, #22D3EE 100%)",
+  accentPrimary: "#7C5CFF",
+  accentBlue: "#4F8CFF",
+  accentCyan: "#22D3EE",
 
-  positive: "#059669",
-  positiveDark: "#10b981",
-  positiveBg: "#dcfce7",
-  positiveBgDark: "rgba(16, 185, 129, 0.12)",
+  // Semantic deltas (12% bg tint)
+  gain: "#2BD67B",
+  gainBg: "rgba(43, 214, 123, 0.12)",
+  gainBorder: "rgba(43, 214, 123, 0.25)",
 
-  negative: "#e11d48",
-  negativeDark: "#f43f5e",
-  negativeBg: "#fee2e2",
-  negativeBgDark: "rgba(244, 63, 94, 0.12)",
+  loss: "#FF5C6C",
+  lossBg: "rgba(255, 92, 108, 0.12)",
+  lossBorder: "rgba(255, 92, 108, 0.25)",
 
-  warning: "#d97706",
-  warningDark: "#f59e0b",
-  warningBg: "#fef3c7",
-  warningBgDark: "rgba(245, 158, 11, 0.12)",
+  warning: "#FFB84D",
+  warningBg: "rgba(255, 184, 77, 0.12)",
 
-  ai: "#7c3aed",
-  aiDark: "#8b5cf6",
-  aiBg: "#ede9fe",
-  aiBgDark: "rgba(139, 92, 246, 0.12)",
-  aiAccent: "#6366f1",
-  live: "#10b981",
+  // Ambient Glows
+  glowViolet: "rgba(124, 92, 255, 0.15)",
+  glowCyan: "rgba(34, 211, 238, 0.10)",
+
+  // Hairline borders
+  hairline: "rgba(255, 255, 255, 0.06)",
+  hairlineHover: "rgba(255, 255, 255, 0.14)",
+
+  // Glass card background
+  glassCard: "rgba(19, 28, 48, 0.60)",
+
+  // Soft Neo-Light Mode
+  light: {
+    bg0: "#F6F5F2",
+    bg1: "#FFFFFF",
+    bg2: "#FFFFFF",
+    bg3: "#F0EFEA",
+    text1: "#14171F",
+    text2: "#5A6478",
+    text3: "#8E98A8",
+    accent: "#3B3BF0",
+    hairline: "rgba(0, 0, 0, 0.06)",
+    hairlineHover: "rgba(0, 0, 0, 0.12)",
+    glassCard: "rgba(255, 255, 255, 0.85)",
+  },
 } as const;
 
 export const radius = {
-  sm: "0.375rem", // 6px — badges, chips
-  md: "0.5rem", // 8px — inputs, buttons
-  lg: "0.75rem", // 12px — cards
-  xl: "1rem", // 16px — panels, modals
-  full: "9999px",
-} as const;
-
-export const spacing = {
-  pageX: "1rem", // 16px base page gutter (mobile)
-  pageXDesktop: "1.5rem",
-  sectionGap: "1rem", // vertical rhythm between cards/sections
-  cardPadding: "1rem",
-  cardPaddingLarge: "1.25rem",
-} as const;
-
-export const typography = {
-  fontFamily:
-    "Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif",
-  // Type scale (desktop-first, steps down gracefully on mobile)
-  display: { size: "1.5rem", lineHeight: "2rem", weight: 700 }, // page titles
-  title: { size: "1.125rem", lineHeight: "1.75rem", weight: 600 }, // card titles
-  body: { size: "0.875rem", lineHeight: "1.5rem", weight: 400 },
-  small: { size: "0.75rem", lineHeight: "1.125rem", weight: 400 },
-  mono: "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", // prices
+  card: "20px",     // 20px cards
+  button: "12px",   // 12px buttons/inputs
+  full: "9999px",   // 999px chips/pills
 } as const;
 
 export const shadows = {
-  /** Subtle default for white cards on the neutral background. */
-  card: "0 1px 2px 0 rgb(15 23 42 / 0.05)",
-  /** Floating surfaces: dropdowns, tooltips, modals. */
-  pop: "0 8px 24px -8px rgb(15 23 42 / 0.18)",
-} as const;
-
-/** Breakpoints mirror Tailwind defaults; layout primitives use them. */
-export const breakpoints = {
-  mobile: 0,
-  tablet: 768, // md
-  desktop: 1024, // lg
-  wide: 1280, // xl
+  glassCard: "0 20px 60px -20px rgba(0, 0, 0, 0.60), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
+  glassCardHover: "0 24px 70px -15px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.10)",
+  buttonGlow: "0 8px 24px -4px rgba(124, 92, 255, 0.40)",
+  gainGlow: "0 0 20px -2px rgba(43, 214, 123, 0.25)",
+  lossGlow: "0 0 20px -2px rgba(255, 92, 108, 0.25)",
 } as const;
 
 export const FALLBACK_TEXT = "Data unavailable" as const;
 
-/** Null-safe formatters shared by data components. Never invent values. */
+/** Format prices with Indian grouping (e.g. 24,530.80) */
 export function formatPriceINR(value: unknown): string {
   if (value === null || value === undefined) return FALLBACK_TEXT;
   const n = Number(value);
   if (!Number.isFinite(n)) return FALLBACK_TEXT;
-  return n.toLocaleString("en-IN");
+  return n.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export function formatPrice2dp(value: unknown): string {
